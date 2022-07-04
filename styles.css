@@ -1,4 +1,44 @@
-/* Sets all the text color to red! */
-body {
-    color: red;
+.chinese-pane {
+    padding: 1em;
+}
+
+.chinese-hint {
+    color: var(--text-muted);
+}
+
+.cn {
+    font-size: 1.5em;
+}
+
+.chinese-hsk {
+    border-radius: 10%;
+    color: white;
+    font-size: 0.9em;
+    font-weight: 500;
+    background: grey;
+    padding: 0.3em;
+}
+
+.chinese-hsk1 {
+    background-color: #f6d100;
+}
+
+.chinese-hsk2 {
+    background-color: #008fac;
+}
+
+.chinese-hsk3 {
+    background-color: #e97800;
+}
+
+.chinese-hsk4 {
+    background-color: #ba0035;
+}
+
+.chinese-hsk5 {
+    background-color: #1d0087;
+}
+
+.chinese-hsk6 {
+    background-color: #610087;
 }
