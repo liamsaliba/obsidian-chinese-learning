@@ -1,15 +1,20 @@
 .chinese-pane {
     padding: 1em;
     margin-bottom: 3em;
+    user-select: contain;
 }
 
 .chinese-pane h4 {
     margin-top: 1em;
 } 
 
+.cn-hanzi {
+    margin-right: 2em;
+}
+
 .chinese-hint {
     color: var(--text-muted);
-    margin-left: 2em;
+    white-space: pre;
 }
 
 .cn {
@@ -20,14 +25,14 @@
     float: right;
     border-radius: 10%;
     color: white;
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: 500;
     background: grey;
-    padding: 0.3em;
+    padding: 0.2em;
 }
 
 .chinese-hsk1 {
-    background-color: #f6d100;
+    background-color: #e0bf00;
 }
 
 .chinese-hsk2 {

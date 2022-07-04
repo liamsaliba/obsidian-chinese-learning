@@ -42,19 +42,30 @@ export class ChineseDictionaryView extends ItemView {
 
     let entry = root.createDiv({cls: "cn-dictionary-entry"});
 
-    let styledHanzi = query.split(/(\p{Script=Han})/ug).map((substr) => {
+    let styledHanzi = query.split(/(\p{Script=Han})/ug)
+      .filter(s => s !== "")
+      .map((substr) => {
       if (substr.match(/(\p{Script=Han})/ug)) {
         return createSpan({text: substr, cls: "cn"});
       } else {
         return createSpan({text: substr})
       }
     });
-    let top = entry.createDiv();
-    top.setChildrenInPlace(styledHanzi);
+    let hanzi = entry.createSpan({cls: "cn-hanzi"});
+    hanzi.setChildrenInPlace(styledHanzi);
 
     if (definitions !== undefined) {
-      top.createSpan({ text: Object.keys(definitions).join(', '), cls: "chinese-hint" });
-      
+      entry.createSpan({ text: Object.keys(definitions).join(', '), cls: "chinese-hint" });
+    } else {
+      entry.createSpan({ text: pinyin(query), cls: "chinese-hint" });
+    }
+
+    const hskLevel = hsk(query);
+    if (hskLevel !== null) {
+      entry.createSpan({ text: `HSK ${hskLevel}`, cls: `chinese-hsk chinese-hsk${hskLevel}` });
+    }
+
+    if (definitions !== undefined) {
       for (const [pinyin, translations] of Object.entries(definitions)) {
         const glosses = translations.join(" | ");
         entry.createEl("div", {text: glosses});
@@ -62,13 +73,6 @@ export class ChineseDictionaryView extends ItemView {
           // entry.createEl("li", { text: gloss, cls: `chinese-english` });
         // }
       }
-    } else {
-      top.createSpan({ text: pinyin(query), cls: "chinese-hint" });
-    }
-
-    const hskLevel = hsk(query);
-    if (hskLevel !== null) {
-      top.createSpan({ text: `HSK ${hskLevel}`, cls: `chinese-hsk chinese-hsk${hskLevel}` });
     }
   }
 
