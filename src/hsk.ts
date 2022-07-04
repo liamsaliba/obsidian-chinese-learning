@@ -46,8 +46,12 @@ hsk.forEach((hskLevelWords, hskLevel) => {
   hskLevel += 1; // 0 indexed
   for (let word of hskLevelWords) {
     hskWords[word] = hskLevel;
+    // if (word.length == 1) {
+    //   hskChars[word] = hskLevel;
+    // }
+
     for (let char of word) {
-      if (hskWords[word]) continue;
+      if (hskChars[char]) continue;
       hskChars[char] = hskLevel;
     }
   }
@@ -63,10 +67,9 @@ export const getHSKLevel = (text: string) => {
   if (hskWords[text]) return hskWords[text];
   let maxHSK = 0;
   for (let char of text.split("")) {
-    if (!hskChars[char] && isHanzi(char)) {
-      return null; // not in HSK
-    }
-    Math.max(maxHSK, hskChars[char]);
+    if (!isHanzi(char)) continue;
+    if (!hskChars[char]) return null; // not in HSK
+    maxHSK = Math.max(maxHSK, hskChars[char]);
   }
   return maxHSK == 0 ? null : maxHSK;
 }

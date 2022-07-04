@@ -1,9 +1,15 @@
 .chinese-pane {
     padding: 1em;
+    margin-bottom: 3em;
 }
+
+.chinese-pane h4 {
+    margin-top: 1em;
+} 
 
 .chinese-hint {
     color: var(--text-muted);
+    margin-left: 2em;
 }
 
 .cn {
@@ -11,6 +17,7 @@
 }
 
 .chinese-hsk {
+    float: right;
     border-radius: 10%;
     color: white;
     font-size: 0.9em;
