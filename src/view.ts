@@ -41,7 +41,7 @@ export class ChineseDictionaryView extends ItemView {
     }
 
     let entry = root.createDiv({cls: "cn-dictionary-entry"});
-
+    query = query.trim();
     let styledHanzi = query.split(/(\p{Script=Han})/ug)
       .filter(s => s !== "")
       .map((substr) => {
@@ -54,12 +54,6 @@ export class ChineseDictionaryView extends ItemView {
     let hanzi = entry.createSpan({cls: "cn-hanzi"});
     hanzi.setChildrenInPlace(styledHanzi);
 
-    if (definitions !== undefined) {
-      entry.createSpan({ text: Object.keys(definitions).join(', '), cls: "chinese-hint" });
-    } else {
-      entry.createSpan({ text: pinyin(query), cls: "chinese-hint" });
-    }
-
     const hskLevel = hsk(query);
     if (hskLevel !== null) {
       entry.createSpan({ text: `HSK ${hskLevel}`, cls: `chinese-hsk chinese-hsk${hskLevel}` });
@@ -67,17 +61,23 @@ export class ChineseDictionaryView extends ItemView {
 
     if (definitions !== undefined) {
       for (const [pinyin, translations] of Object.entries(definitions)) {
+        let div = entry.createDiv()
+        div.createEl("span", {text: pinyin, cls: "chinese-hint pinyin"});
+
         const glosses = translations.join(" | ");
-        entry.createEl("div", {text: glosses});
+        div.createEl("span", {text: glosses});
         // for (const gloss of translations) {
           // entry.createEl("li", { text: gloss, cls: `chinese-english` });
         // }
       }
+    } else {
+      entry.createSpan({ text: pinyin(query), cls: "chinese-hint" });
     }
+
   }
 
   update() {
-    let query = this.query;
+    let query = this.query.trim();
     let root = this.contentEl.children[0];
     root.empty();
 

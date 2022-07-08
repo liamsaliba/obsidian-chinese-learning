@@ -53,7 +53,6 @@ export default class ChinesePlugin extends Plugin {
 		this.registerEditorExtension(
 			EditorView.updateListener.of((v) => {
 				if (v.selectionSet) {
-					console.log(this.selection);
 					if (this.selection !== this.getSelection()) {
 						this.selection = this.getSelection();
 						this.onChange();

@@ -21,6 +21,17 @@
     font-size: 1.5em;
 }
 
+.pinyin::before {
+}
+
+.pinyin {
+    padding-right: "3em";
+}
+
+.pinyin::after {
+    content: "    ";
+}
+
 .chinese-hsk {
     float: right;
     border-radius: 10%;
