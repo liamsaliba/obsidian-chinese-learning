@@ -1,7 +1,7 @@
 import { addIcon, MarkdownView, Plugin } from "obsidian";
 import pinyin from "chinese-to-pinyin";
 import { ChineseDictionaryView, VIEW_TYPE_CDICT } from "./view";
-import hsk from "./hsk";
+import {getHSK2Level, getHSK3Level} from "./hsk";
 import dict from "./dict";
 import { EditorView } from "@codemirror/view";
 
@@ -99,7 +99,7 @@ export default class ChinesePlugin extends Plugin {
 				// 	});
 				// }
 
-				const hskLevel = hsk(selection);
+				const hskLevel = getHSK2Level(selection);
 				if (hskLevel !== null) {
 					menu.addItem((item) => {
 						item.setTitle(hskLevel.toString()).setIcon("hsk");

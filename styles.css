@@ -32,7 +32,7 @@
     content: "    ";
 }
 
-.chinese-hsk {
+.chinese-hsk, .chinese-hsk-3 {
     float: right;
     border-radius: 10%;
     color: white;
@@ -41,6 +41,12 @@
     background: grey;
     padding: 0.2em;
 }
+
+.chinese-hsk-3 {
+    font-size: 0.77em;
+    border-style: dashed;
+}
+
 
 .chinese-hsk1 {
     background-color: #e0bf00;

@@ -1,7 +1,7 @@
 import pinyin from "chinese-to-pinyin";
 import { ItemView, WorkspaceLeaf } from "obsidian";
 import { queryDictionary } from "./dict";
-import hsk from "./hsk";
+import { getHSK2Level, getHSK3Level } from "./hsk";
 
 export const VIEW_TYPE_CDICT = "chinese-dictionary-view";
 
@@ -54,11 +54,16 @@ export class ChineseDictionaryView extends ItemView {
     let hanzi = entry.createSpan({cls: "cn-hanzi"});
     hanzi.setChildrenInPlace(styledHanzi);
 
-    const hskLevel = hsk(query);
-    if (hskLevel !== null) {
-      entry.createSpan({ text: `HSK ${hskLevel}`, cls: `chinese-hsk chinese-hsk${hskLevel}` });
+    
+    // const hsk3Level = getHSK3Level(query);
+    // if (hsk3Level !== null) {
+    //   entry.createSpan({ text: `^${hsk3Level}`, cls: `chinese-hsk-3 chinese-hsk-3${hsk3Level}` });
+    // }
+    
+    const hsk2Level = getHSK2Level(query);
+    if (hsk2Level !== null) {
+      entry.createSpan({ text: `HSK ${hsk2Level}`, cls: `chinese-hsk chinese-hsk${hsk2Level}` });
     }
-
     if (definitions !== undefined) {
       for (const [pinyin, translations] of Object.entries(definitions)) {
         let div = entry.createDiv()
